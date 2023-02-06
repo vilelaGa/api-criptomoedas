@@ -1,8 +1,23 @@
 const express = require("express");
 const routes = express.Router();
+const db = require("../infra/database/connect");
+const {
+  ListAllCriptosController,
+} = require("../controllers/ListAllCriptosController");
 
-routes.get("/", (req, res) => {
-  return res.send({ nome: "Ola Mundo" });
-});
+const { ListSpcifMoedas } = require("../controllers/ListSpcifMoedas");
+
+const { ListConverMoeda } = require("../controllers/ListConverMoeda");
+
+routes.get("/all", ListAllCriptosController.TrazAllMoedas);
+
+routes.get("/moeda/token/:token", ListSpcifMoedas.TrazMoedaEsp);
+
+routes.get(
+  "/conversao/moedas/:token/:conversao",
+  ListConverMoeda.TrazCoverMoeda
+);
+
+// routes.get("/conversao/all/:conversao", ListConverMoeda.TrazCoverMoeda);
 
 module.exports = routes;
