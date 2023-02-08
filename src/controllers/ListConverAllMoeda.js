@@ -19,37 +19,48 @@ class ListConverAllMoeda {
 
         var { data } = await api.get(`${conversao}`);
 
-        db.query("SELECT * FROM api", (err, result) => {
-          for (var i = 0; i < 10; i++) {
-            var valor = result[0].valor / data[0].bid;
-
-            return res.json({
-              id: result[0].id,
-              token: result[0].token,
-              nome: result[0].nome,
-              valor: valor,
-              img: result[0].img,
-            });
-          }
+        db.query("SELECT * FROM api", async (err, result) => {
+          var rsmoedas;
+          return res.json(
+            await result.map(function (moedas) {
+              var converMoeda = moedas.valor / data[0].bid;
+              // console.log(converMoeda);
+              rsmoedas = {
+                id: moedas.id,
+                token: moedas.token,
+                nome: moedas.nome,
+                valor: converMoeda,
+                img: moedas.img,
+              };
+              return rsmoedas;
+              // console.log(rsmoedas);
+            })
+          );
         });
+
         break;
       case "USD":
         console.log(`Conversão em DOLAR`);
 
         var { data } = await api.get(`${conversao}`);
 
-        db.query("SELECT * FROM api", (err, result) => {
-          for (var i = 0; i < 10; i++) {
-            var valor = result[0].valor / data[0].bid;
-
-            return res.json({
-              id: result[0].id,
-              token: result[0].token,
-              nome: result[0].nome,
-              valor: valor,
-              img: result[0].img,
-            });
-          }
+        db.query("SELECT * FROM api", async (err, result) => {
+          var rsmoedas;
+          return res.json(
+            await result.map(function (moedas) {
+              var converMoeda = moedas.valor / data[0].bid;
+              // console.log(converMoeda);
+              rsmoedas = {
+                id: moedas.id,
+                token: moedas.token,
+                nome: moedas.nome,
+                valor: converMoeda,
+                img: moedas.img,
+              };
+              return rsmoedas;
+              // console.log(rsmoedas);
+            })
+          );
         });
 
         break;
