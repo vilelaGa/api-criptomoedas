@@ -9,6 +9,8 @@ const { ListSpcifMoedas } = require("../controllers/ListSpcifMoedas");
 
 const { ListConverMoeda } = require("../controllers/ListConverMoeda");
 
+const { ListConverAllMoeda } = require("../controllers/ListConverAllMoeda");
+
 routes.get("/all", ListAllCriptosController.TrazAllMoedas);
 
 routes.get("/moeda/token/:token", ListSpcifMoedas.TrazMoedaEsp);
@@ -18,7 +20,6 @@ routes.get(
   ListConverMoeda.TrazCoverMoeda
 );
 
-// routes.get("/conversao/all/:conversao", ListConverMoeda.TrazCoverMoeda);
-// Comentario aleatorio
+routes.get("/conversao/all/:conversao", ListConverAllMoeda.TrazCoverAllMoedas);
 
 module.exports = routes;
